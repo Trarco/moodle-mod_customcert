@@ -278,7 +278,7 @@ Existing element plugins may continue using legacy hooks in 5.2, but must be upd
 #### Common pitfalls
 - Do not assume `get_data()` returns a scalar string; it may be JSON with multiple keys.
 - Do not overwrite the whole JSON payload with a single scalar; always normalise to an object payload via Element System v2 interfaces.
-- Do not store standard visual fields (`font`/`fontsize`/`colour`/`width`) in custom keys; rely on the core merge behaviour.
+- Always include standard visual fields (`font`/`fontsize`/`colour`/`width`) explicitly in your `normalise_data()` return value where applicable; they are not merged centrally.
 
 ## [5.0.2] - 2025-12-18
 

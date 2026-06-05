@@ -126,7 +126,9 @@ class element extends \mod_customcert\element {
             $value = $course->shortname;
         }
 
-        return format_string($value, true, ['context' => $context]);
+        // Marco Traina - www.trainaepartners.it
+        // Use core_text::strtoupper() for multibyte-safe uppercase conversion.
+        return \core_text::strtoupper(format_string($value, true, ['context' => $context]));
     }
 
     /**

@@ -99,6 +99,11 @@ class element extends \mod_customcert\element {
      */
     protected function get_text(): string {
         $context = \mod_customcert\element_helper::get_context($this->get_id());
-        return format_text($this->get_data(), FORMAT_HTML, ['context' => $context]);
+        $formatted = format_text($this->get_data(), FORMAT_HTML, ['context' => $context]);
+        // Marco Traina - www.trainaepartners.it
+        // Remove <a> tags injected by text filters (e.g. activity names auto-linking)
+        // but keep their inner text, so TCPDF renders with the user-configured
+        // font, colour and style instead of the default hyperlink appearance.
+        return preg_replace('/<a\b[^>]*>(.*?)<\/a>/is', '$1', $formatted);
     }
 }

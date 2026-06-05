@@ -31,13 +31,15 @@ namespace customcertelement_text;
  * @copyright  2013 Mark Nelson <markn@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class element extends \mod_customcert\element {
+class element extends \mod_customcert\element
+{
     /**
      * This function renders the form elements when adding a customcert element.
      *
      * @param \MoodleQuickForm $mform the edit_form instance
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform)
+    {
         $mform->addElement('textarea', 'text', get_string('text', 'customcertelement_text'));
         $mform->setType('text', PARAM_RAW);
         $mform->addHelpButton('text', 'text', 'customcertelement_text');
@@ -52,7 +54,8 @@ class element extends \mod_customcert\element {
      * @param \stdClass $data the form data
      * @return string the text
      */
-    public function save_unique_data($data) {
+    public function save_unique_data($data)
+    {
         return $data->text;
     }
 
@@ -63,7 +66,8 @@ class element extends \mod_customcert\element {
      * @param bool $preview true if it is a preview, false otherwise
      * @param \stdClass $user the user we are rendering this for
      */
-    public function render($pdf, $preview, $user) {
+    public function render($pdf, $preview, $user)
+    {
         \mod_customcert\element_helper::render_content($pdf, $this, $this->get_text());
     }
 
@@ -75,7 +79,8 @@ class element extends \mod_customcert\element {
      *
      * @return string the html
      */
-    public function render_html() {
+    public function render_html()
+    {
         return \mod_customcert\element_helper::render_html_content($this, $this->get_text());
     }
 
@@ -84,7 +89,8 @@ class element extends \mod_customcert\element {
      *
      * @param \MoodleQuickForm $mform the edit_form instance
      */
-    public function definition_after_data($mform) {
+    public function definition_after_data($mform)
+    {
         if (!empty($this->get_data())) {
             $element = $mform->getElement('text');
             $element->setValue($this->get_data());
@@ -97,7 +103,8 @@ class element extends \mod_customcert\element {
      *
      * @return string
      */
-    protected function get_text(): string {
+    protected function get_text(): string
+    {
         $context = \mod_customcert\element_helper::get_context($this->get_id());
         $formatted = format_text($this->get_data(), FORMAT_HTML, ['context' => $context]);
         // Marco Traina - www.trainaepartners.it
